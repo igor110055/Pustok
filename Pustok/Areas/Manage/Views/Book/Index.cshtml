@@ -1,0 +1,44 @@
+﻿@model List<Book>
+@{ ViewData["Title"] = "Book";
+                int count = 0; }
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <a asp-action="Create" class="btn btn-primary">Create</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Discounted Price</th>
+                        <th scope="col">PageSize</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var book in Model)
+                    {
+                        count++;
+        <tr>
+            <th scope="row">@count</th>
+            <td>@book.Name</td>
+            <td>@book.Author.Fullname</td>
+            <td>@book.SalePrice $</td>
+            <td>@(@book.SalePrice-@book.SalePrice*@book.DiscountPercent/100) $</td>
+            <td>@book.PageSize</td>
+            <td>
+                <a asp-action="Edit" class="btn btn-primary">Edit</a>
+                <a asp-action="Delete" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
